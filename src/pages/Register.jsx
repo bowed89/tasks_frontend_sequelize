@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../styles/Login.css";
 
-
 const URL = process.env.REACT_APP_URL_BACKEND;
 
 function Register() {
@@ -14,18 +13,18 @@ function Register() {
   });
 
   const [msg, setMsg] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    console.log("URL ==>", URL);
-
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
   const handleRegister = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
+    setMsg("");
     try {
       await axios.post(`${URL}/auth/register`, {
         nombre: formData.nombre,
@@ -42,6 +41,8 @@ function Register() {
       } else {
         setMsg("❌ Ocurrió un error al registrarse");
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -57,6 +58,7 @@ function Register() {
             value={formData.nombre}
             onChange={handleChange}
             className="login-input"
+            disabled={loading}
           />
           <input
             type="email"
@@ -65,6 +67,7 @@ function Register() {
             value={formData.email}
             onChange={handleChange}
             className="login-input"
+            disabled={loading}
           />
           <input
             type="password"
@@ -73,11 +76,19 @@ function Register() {
             value={formData.pass}
             onChange={handleChange}
             className="login-input"
+            disabled={loading}
           />
-          <button type="submit" className="login-button">
-            Registrarse
+          <button type="submit" className="login-button" disabled={loading}>
+            {loading ? "Registrando..." : "Registrarse"}
           </button>
         </form>
+
+        {loading && (
+          <div className="spinner-container">
+            <div className="spinner"></div>
+          </div>
+        )}
+
         {msg && (
           <p className="login-error" style={{ color: msg.startsWith("✅") ? "green" : "red" }}>
             {msg}

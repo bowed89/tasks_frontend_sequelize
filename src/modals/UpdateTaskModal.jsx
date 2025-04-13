@@ -35,8 +35,8 @@ function UpdateTaskModal({ onClose, onCreated, idTask }) {
         }
       );
       alertMessage("success", "Tarea Actualizada", "Se actualizo la tarea correctamente.");
-      onCreated(); // refrescar lista
-      onClose(); // cerrar modal
+      onCreated(); 
+      onClose();
     } catch (error) {
       console.error("Error al actualizar tarea:", error.response.data.message);
       alertMessage("error", "Error", error.response?.data?.message);
