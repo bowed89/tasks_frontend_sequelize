@@ -57,7 +57,7 @@ function DataTable({ filter }) {
       alertMessage("success", "Tarea Agregada", "Se elimino la tarea correctamente.");
       fetchData();
     } catch (err) {
-      console.error("Error al cargar datos:", );
+      console.error("Error al cargar datos:");
       alertMessage("error", "Error", err.response.data.message);
     }
   };
@@ -95,12 +95,14 @@ function DataTable({ filter }) {
               <td data-label="Estado">{item.estado}</td>
               <td data-label="Fecha límite">{item.fecha_limite}</td>
               <td data-label="Acciones">
-                <button className="btn btn-edit" onClick={() => clickUpdate(item.id)}>
-                  Editar
-                </button>
-                <button className="btn btn-delete" onClick={() => clickDelete(item.id)}>
-                  Eliminar
-                </button>
+                <div className="actions-wrapper">
+                  <button className="btn btn-edit" onClick={() => clickUpdate(item.id)}>
+                    Editar
+                  </button>
+                  <button className="btn btn-delete" onClick={() => clickDelete(item.id)}>
+                    Eliminar
+                  </button>
+                </div>
               </td>
             </tr>
           ))}

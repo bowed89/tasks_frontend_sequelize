@@ -77,11 +77,24 @@ body {
 .btn-edit {
   background-color: #5cb85c;
   color: white;
+  min-width: 80px;
+  text-align: center;
+  display: inline-block;
 }
 
 .btn-delete {
   background-color: #d9534f;
   color: white;
+  min-width: 80px;
+  text-align: center;
+  display: inline-block;
+}
+
+.actions-wrapper {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 /* Responsivo */
